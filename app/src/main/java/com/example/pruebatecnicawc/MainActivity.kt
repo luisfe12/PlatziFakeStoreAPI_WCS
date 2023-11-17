@@ -25,14 +25,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    AppScreen();
                 }
             }
         }
     }
 }
 
-@Composable
+/*@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -46,4 +46,4 @@ fun GreetingPreview() {
     PruebaTecnicaWcTheme {
         Greeting("Android")
     }
-}
+}*/
