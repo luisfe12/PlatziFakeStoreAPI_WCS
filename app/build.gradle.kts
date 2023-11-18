@@ -69,6 +69,7 @@ dependencies {
     //navigation
     val nav_version = "2.7.5"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")

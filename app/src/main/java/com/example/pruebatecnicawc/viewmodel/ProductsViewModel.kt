@@ -18,8 +18,14 @@ class ProductsViewModel @Inject constructor(
 ):ViewModel() {
     private val _products = MutableStateFlow<List<ProductsResponseItem>>(emptyList());
     private val _isOrderedPreice = MutableStateFlow<Boolean>(false);
+    private val _nameSearch = MutableStateFlow<String>("");
     val products:StateFlow<List<ProductsResponseItem>> = _products.asStateFlow();
     val isOrderedPreice:StateFlow<Boolean> = _isOrderedPreice.asStateFlow();
+    val nameSearch:StateFlow<String> = _nameSearch.asStateFlow();
+
+    fun changeNameProductToSearch(searchName:String){
+        _nameSearch.value = searchName;
+    }
 
     init {
         viewModelScope.launch {
