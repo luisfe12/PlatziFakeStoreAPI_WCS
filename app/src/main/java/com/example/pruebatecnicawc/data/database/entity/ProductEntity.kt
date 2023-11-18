@@ -1,4 +1,4 @@
-package com.example.pruebatecnicawc.data.database
+package com.example.pruebatecnicawc.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
