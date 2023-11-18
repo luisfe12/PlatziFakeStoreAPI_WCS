@@ -19,12 +19,21 @@ import com.example.pruebatecnicawc.viewmodel.ProductsViewModel
 @Composable
 fun ProductsMainScreen(navController: NavHostController, paddingValues: PaddingValues) {
     val productsViewModel = hiltViewModel<ProductsViewModel>()
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(WhiteBackGroundApp)) {
-        Text(text = "Lista de Productos", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(WhiteBackGroundApp)
+    ) {
+        Text(
+            text = "Lista de Productos",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        )
         Box(modifier = Modifier.fillMaxWidth()) {
-
+            ListProducts(navController = navController, productsViewModel = productsViewModel)
         }
     }
 }

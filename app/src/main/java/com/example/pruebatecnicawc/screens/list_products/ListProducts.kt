@@ -30,14 +30,20 @@ import com.example.pruebatecnicawc.viewmodel.ProductsViewModel
 
 @Composable
 fun ListProducts(navController: NavHostController, productsViewModel: ProductsViewModel) {
-    val products by productsViewModel.products.collectAsStateWithLifecycle()
+    val products by productsViewModel.products.collectAsStateWithLifecycle();
+    val name by productsViewModel.nameSearch.collectAsStateWithLifecycle()
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        SearchProductdTextField(name = name, onCurrentName = {
+            productsViewModel.changeNameProductToSearch(it)
+        })
+    }
     if (products.isNotEmpty()) {
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-            items(products) {
-
+            items(products) { product ->
+                CardProductFromList(navController = navController, product = product)
             }
         }
-    }else{
+    } else {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
@@ -46,10 +52,10 @@ fun ListProducts(navController: NavHostController, productsViewModel: ProductsVi
 
 
 @Composable
-fun SerachProductdTextField(name: String, productsViewModel: ProductsViewModel) {
+fun SearchProductdTextField(name: String, onCurrentName: (String) -> Unit) {
     OutlinedTextField(
         value = name,
-        onValueChange = { productsViewModel.changeNameProductToSearch(it) },
+        onValueChange = { onCurrentName(it) },
         singleLine = true,
         label = { Text(text = "Producto", fontSize = 15.sp, fontWeight = FontWeight.SemiBold) },
         placeholder = { Text(text = "Buscar Producto") },
