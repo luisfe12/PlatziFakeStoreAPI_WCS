@@ -1,6 +1,7 @@
 package com.example.pruebatecnicawc.di
 
 import com.example.pruebatecnicawc.HttpRoutes
+import com.example.pruebatecnicawc.data.network.ProductService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +22,8 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-
+    @Provides
+    @Singleton
+    fun productsService(retrofit: Retrofit) =
+         retrofit.create(ProductService::class.java);
 }
