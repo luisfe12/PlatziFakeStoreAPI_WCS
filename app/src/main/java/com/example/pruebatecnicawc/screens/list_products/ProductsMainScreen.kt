@@ -42,6 +42,7 @@ fun ProductsMainScreen(navController: NavHostController, paddingValues: PaddingV
         modifier = Modifier
             .fillMaxSize()
             .background(WhiteBackGroundApp)
+            .padding(paddingValues)
     ) {
 
         Row(

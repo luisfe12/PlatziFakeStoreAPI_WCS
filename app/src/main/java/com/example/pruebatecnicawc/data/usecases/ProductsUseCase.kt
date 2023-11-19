@@ -15,10 +15,8 @@ class ProductsUseCase @Inject constructor(
 
     suspend fun getLIstProducts(): List<ProductsResponseItem> {
         val services = produtsRepository.getProductsFromApi();
-        Log.i("Services", "${services}")
         return if (services.isSuccessful){
             val body = services.body()!!
-            Log.i("ServicesBody", "${body}")
             body
         }else{
             Log.i("ErrorServices", "${services}")
@@ -34,10 +32,8 @@ class ProductsUseCase @Inject constructor(
 
     suspend fun sendProductsToViewModel(): List<ProductModel> {
         return if (getListProductsDb().isNotEmpty()){
-            Log.i("Entro a la BD", "Hay datos bd")
             getListProductsDb().map { it.toDomain() }
         }else{
-            Log.i("Entro a la Api", "No hEntray datos bd")
             val listFromApi = getLIstProducts()
             produtsRepository.insertProductsDB(listFromApi.map { it.toDatabse() })
             listFromApi.map { it.toDomain() }

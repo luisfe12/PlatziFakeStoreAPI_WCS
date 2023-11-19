@@ -49,7 +49,6 @@ class ProductsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _products.value = productsUseCase.sendProductsToViewModel();
-                Log.i("products Size", "${_products.value.size}")
             }catch (e:Exception){
                 Log.i("ErrorProducts", "${e.message}");
             }
