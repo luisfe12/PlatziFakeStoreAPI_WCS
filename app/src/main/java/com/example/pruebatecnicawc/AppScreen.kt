@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.pruebatecnicawc.navigation.NavGraphScreens
 import com.example.pruebatecnicawc.navigation.Routes
@@ -26,7 +27,7 @@ import com.example.pruebatecnicawc.navigation.Routes
 fun AppScreen() {
     val navController = rememberNavController();
 
-    val currentRoute = navController.currentBackStackEntry?.destination?.route
+    val currentScreen = navController.currentBackStackEntryAsState().value
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -41,9 +42,10 @@ fun AppScreen() {
                 }
 
             }, navigationIcon = {
-
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                if (currentScreen?.destination?.route == Routes.ScreenOnlyOneProduct.route) {
+                    IconButton(onClick = { navController.popBackStack(); }) {
+                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                    }
                 }
 
             })
