@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pruebatecnicawc.data.ProductsResponseItem
 import com.example.pruebatecnicawc.data.usecases.ProductsUseCase
+import com.example.pruebatecnicawc.domain.ProductModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,12 +17,12 @@ import javax.inject.Inject
 class ProductsViewModel @Inject constructor(
     private val productsUseCase: ProductsUseCase
 ):ViewModel() {
-    private val _products = MutableStateFlow<List<ProductsResponseItem>>(emptyList());
+    private val _products = MutableStateFlow<List<ProductModel>>(emptyList());
     private val _isSortedPreice = MutableStateFlow<Boolean>(false);
     private val _nameSearch = MutableStateFlow<String>("");
     private val _expandedDDM = MutableStateFlow<Boolean>(false);
     private val _nameOptionSort = MutableStateFlow<String>("Orden por precios");
-    val products:StateFlow<List<ProductsResponseItem>> = _products.asStateFlow();
+    val products:StateFlow<List<ProductModel>> = _products.asStateFlow();
     val isSortedPreice:StateFlow<Boolean> = _isSortedPreice.asStateFlow();
     val nameSearch:StateFlow<String> = _nameSearch.asStateFlow();
     val expandedDDM:StateFlow<Boolean> = _expandedDDM.asStateFlow();
@@ -47,8 +48,8 @@ class ProductsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             try {
-                _products.value = productsUseCase.getLIstProducts();
-                Log.i("products", "${_products.value}")
+                _products.value = productsUseCase.sendProductsToViewModel();
+                Log.i("products Size", "${_products.value.size}")
             }catch (e:Exception){
                 Log.i("ErrorProducts", "${e.message}");
             }
