@@ -3,6 +3,7 @@ package com.example.pruebatecnicawc.screens.list_products
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +29,8 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.pruebatecnicawc.data.ProductsResponseItem
 import com.example.pruebatecnicawc.domain.ProductModel
+import com.example.pruebatecnicawc.globalProduct
+import com.example.pruebatecnicawc.navigation.Routes
 import com.example.pruebatecnicawc.ui.theme.GreyCardBorderProductImage
 import com.example.pruebatecnicawc.ui.theme.GreyCardProduct
 
@@ -48,7 +51,11 @@ fun CardProductFromList(navController: NavHostController, product: ProductModel)
                 .fillMaxWidth()
                 .background(GreyCardProduct)
                 .height(heightCard)
-                .padding(2.dp),
+                .padding(2.dp)
+                .clickable {
+                    globalProduct = product;
+                    navController.navigate(Routes.ScreenOnlyOneProduct.route)
+                },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
