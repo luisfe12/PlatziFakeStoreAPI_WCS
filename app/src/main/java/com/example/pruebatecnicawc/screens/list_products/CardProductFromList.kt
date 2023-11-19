@@ -27,14 +27,15 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.pruebatecnicawc.data.ProductsResponseItem
+import com.example.pruebatecnicawc.domain.ProductModel
 import com.example.pruebatecnicawc.ui.theme.GreyCardBorderProductImage
 import com.example.pruebatecnicawc.ui.theme.GreyCardProduct
 
 @Composable
-fun CardProductFromList(navController: NavHostController, product: ProductsResponseItem) {
+fun CardProductFromList(navController: NavHostController, product: ProductModel) {
     val localConfiguration = LocalConfiguration.current
     val heightInDp = localConfiguration.screenHeightDp.dp;
-    val heightCard = heightInDp / 4
+    val heightCard = heightInDp / 3
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,12 +59,14 @@ fun CardProductFromList(navController: NavHostController, product: ProductsRespo
                     .wrapContentHeight()
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth()
+                    .weight(1.5f)
             )
-            ImageListProduct(modifier = Modifier.weight(1f), product.images[0]);
+            ImageListProduct(modifier = Modifier.weight(4.7f), product.images[0]);
             Text(
                 text = "${product.price.toString()}$",
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                modifier = Modifier.weight(0.7f)
             )
         }
     }
